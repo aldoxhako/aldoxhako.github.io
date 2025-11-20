@@ -9,6 +9,7 @@
 	var	$window = $(window),
 		$body = $('body'),
 		$sidebar = $('#sidebar');
+		$menu = $('#menu');
 
 	// Breakpoints.
 		breakpoints({
@@ -48,6 +49,10 @@
 		if ($sidebar.length > 0) {
 
 			var $sidebar_a = $sidebar.find('a');
+			var $menu_a = $menu.find('a');
+
+
+			$.merge($sidebar_a, $menu_a);
 
 			$sidebar_a
 				.addClass('scrolly')
@@ -79,36 +84,34 @@
 							return;
 
 					// Scrollex.
-						$section.scrollex({
-							mode: 'middle',
-							top: '-20vh',
-							bottom: '-20vh',
-							initialize: function() {
+					$section.scrollex({
+						mode: 'middle',
+						top: '-20vh',
+						bottom: '-20vh',
+						initialize: function() {
 
-								// Deactivate section.
-									$section.addClass('inactive');
+							// Deactivate section.
+						$section.addClass('inactive');
 
-							},
-							enter: function() {
+						},
+						enter: function() {
 
-								// Activate section.
-									$section.removeClass('inactive');
+						// Activate section.
+						$section.removeClass('inactive');
 
-								// No locked links? Deactivate all links and activate this section's one.
-									if ($sidebar_a.filter('.active-locked').length == 0) {
+						// No locked links? Deactivate all links and activate this section's one.
+						if ($sidebar_a.filter('.active-locked').length == 0) {
 
-										$sidebar_a.removeClass('active');
-										$this.addClass('active');
+							$sidebar_a.removeClass('active');
+							$this.addClass('active');
+						}
 
-									}
+						// Otherwise, if this section's link is the one that's locked, unlock it.
+						else if ($this.hasClass('active-locked'))
+							$this.removeClass('active-locked');
 
-								// Otherwise, if this section's link is the one that's locked, unlock it.
-									else if ($this.hasClass('active-locked'))
-										$this.removeClass('active-locked');
-
-							}
-						});
-
+						}
+					});
 				});
 
 		}
@@ -168,23 +171,122 @@
 			});
 
 	// Features.
-		$('.features')
-			.scrollex({
-				mode: 'middle',
-				top: '-20vh',
-				bottom: '-20vh',
-				initialize: function() {
+	$('.features')
+		.scrollex({
+			mode: 'middle',
+			top: '-20vh',
+			bottom: '-20vh',
+			initialize: function() {
 
-					// Deactivate section.
-						$(this).addClass('inactive');
+				// Deactivate section.
+					$(this).addClass('inactive');
 
-				},
-				enter: function() {
+			},
+			enter: function() {
 
-					// Activate section.
-						$(this).removeClass('inactive');
+				// Activate section.
+					$(this).removeClass('inactive');
 
-				}
-			});
+			}
+		});
 
+	var $menu = $('#menu'),
+	$menuInner;
+
+	$menu.wrapInner('<div class="inner"></div>');
+	$menuInner = $menu.children('.inner');
+	$menu._locked = false;
+
+	$menu._lock = function() {
+
+		if ($menu._locked)
+			return false;
+
+		$menu._locked = true;
+
+		window.setTimeout(function() {
+			$menu._locked = false;
+		}, 350);
+
+		return true;
+
+	};
+
+	$menu._show = function() {
+
+		if ($menu._lock())
+			$body.addClass('is-menu-visible');
+
+	};
+
+	$menu._hide = function() {
+
+		if ($menu._lock())
+			$body.removeClass('is-menu-visible');
+
+	};
+
+	$menu._toggle = function() {
+
+		if ($menu._lock())
+			$body.toggleClass('is-menu-visible');
+
+	};
+
+	$menuInner
+		.on('click', function(event) {
+			event.stopPropagation();
+		})
+		.on('click', 'a', function(event) {
+
+			var href = $(this).attr('href');
+
+			event.preventDefault();
+			event.stopPropagation();
+
+			// Hide.
+				$menu._hide();
+
+			// Redirect.
+				window.setTimeout(function() {
+					window.location.href = href;
+				}, 250);
+
+		});
+
+	$menu
+		.appendTo($body)
+		.on('click', function(event) {
+
+			event.stopPropagation();
+			event.preventDefault();
+
+			$body.removeClass('is-menu-visible');
+
+		})
+		.append('<a class="close" href="#menu">Close</a>');
+
+	$body
+		.on('click', 'a[href="#menu"]', function(event) {
+
+			event.stopPropagation();
+			event.preventDefault();
+
+			// Toggle.
+				$menu._toggle();
+
+		})
+		.on('click', function(event) {
+
+			// Hide.
+				$menu._hide();
+
+		})
+		.on('keydown', function(event) {
+
+			// Hide on escape.
+				if (event.keyCode == 27)
+					$menu._hide();
+
+		});
 })(jQuery);
