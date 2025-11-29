@@ -4149,7 +4149,7 @@ input, select, textarea {
 		background-position: center;
 		display: block;
 		position: absolute;
-		right: 2em;
+		right: 5%;
 		top: 1em;
 		width: 1.6em;
 		height: 2em;
@@ -4163,3 +4163,10 @@ input, select, textarea {
 			display: block;
 		}
 	}
+
+	video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+	border-radius: 10px;
+  }
