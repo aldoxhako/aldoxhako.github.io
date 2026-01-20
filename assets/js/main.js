@@ -4,6 +4,7 @@
 		$body = $('body'),
 		$sidebar = $('#sidebar');
 		$menu = $('#menu');
+		$jobTitle = $('#jobTitle');
 
 	// Breakpoints.
 		breakpoints({
@@ -284,3 +285,33 @@
 
 		});
 })(jQuery);
+
+
+document.addEventListener('DOMContentLoaded',function(event){
+
+	const dataText = [ "Software Engineer", "Unity Developer", "WebXR Developer", "Game Designer"];
+  
+	function typeWriter(text, i, fnCallback) {
+		if (i < (text.length)) {
+			document.querySelector("#jobTitle").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+			setTimeout(function() {
+				typeWriter(text, i + 1, fnCallback)
+			}, 100);
+		}
+		else if (typeof fnCallback == 'function') { 
+			setTimeout(fnCallback, 700);
+		}
+	}
+
+	function StartTextAnimation(i){
+		if (typeof dataText[i] == 'undefined'){
+			StartTextAnimation(0);
+		}
+		else if (i < dataText[i].length) {
+			typeWriter(dataText[i], 0, function(){
+				StartTextAnimation(i + 1);
+			});
+		}
+	}
+	StartTextAnimation(0);
+});
