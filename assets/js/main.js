@@ -289,7 +289,7 @@
 
 document.addEventListener('DOMContentLoaded',function(event){
 
-	const dataText = [ "Software Engineer", "Unity Developer", "WebXR Developer", "Game Designer"];
+	const dataText = [ "Software Engineer", "Unity Developer", "WebXR Developer", "Aspiring Game Designer"];
   
 	function typeWriter(text, i, fnCallback) {
 		if (i < (text.length)) {
