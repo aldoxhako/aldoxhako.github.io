@@ -287,7 +287,7 @@
 })(jQuery);
 
 
-document.addEventListener('DOMContentLoaded',function(event){
+document.addEventListener('load',function(event){
 
 	const dataText = [ "UX Engineer", "Human-Computer Interaction", "Frontend Systems", "Interactive Experiences", "Product Thinking", "User-Centered Design"];
   
