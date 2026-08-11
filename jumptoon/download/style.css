@@ -166,7 +166,7 @@ body::before {
     height: 14cqw;
     object-fit: contain;
     flex-shrink: 0;
-    transform: translateY(-3cqw);
+    transform: translateY(-1.6cqw);
 }
 
 .store-button span {
