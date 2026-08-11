@@ -1,3 +1,7 @@
+/* =========================
+   Font
+   ========================= */
+
 @font-face {
     font-family: "Press Start 2P";
     src: url("../../fonts/PressStart2P-Regular.ttf") format("truetype");
@@ -6,13 +10,10 @@
     font-display: swap;
 }
 
-body {
-    font-family: "Press Start 2P", cursive;
-}
 
-body {
-    font-family: "Press Start 2P", cursive;
-}
+/* =========================
+   Reset
+   ========================= */
 
 * {
     box-sizing: border-box;
@@ -20,18 +21,28 @@ body {
     padding: 0;
 }
 
+
+/* =========================
+   Page
+   ========================= */
+
 html,
 body {
     width: 100%;
     height: 100%;
-    margin: 0;
     overflow: hidden;
 }
 
 body {
     position: relative;
     background: #000;
+    font-family: "Press Start 2P", cursive;
 }
+
+
+/* =========================
+   Animated Background
+   ========================= */
 
 body::before {
     content: "";
@@ -58,6 +69,11 @@ body::before {
     }
 }
 
+
+/* =========================
+   Main Layout
+   ========================= */
+
 .landing {
     position: relative;
     z-index: 1;
@@ -75,6 +91,11 @@ body::before {
         max(24px, env(safe-area-inset-bottom));
 }
 
+
+/* =========================
+   Game Logo
+   ========================= */
+
 .game-logo {
     display: block;
 
@@ -84,14 +105,10 @@ body::before {
     margin-bottom: 48px;
 }
 
-.buttons {
-    width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
+/* =========================
+   Store Buttons
+   ========================= */
 
 .buttons {
     width: 100%;
@@ -103,46 +120,80 @@ body::before {
 }
 
 .store-button {
-    width: 65%;
+    width: 60%;
     max-width: 320px;
-    aspect-ratio: 640 / 181;
+    aspect-ratio: 640 / 191;
 
-    font-family: "Press Start 2P", cursive;
-    font-size: 14px;
+    /* Makes cqw relative to this button */
+    container-type: inline-size;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
 
-    background: url("../../images/storeButton.png") center / 100% 100% no-repeat;
+    gap: 2cqw;
+
+    background:
+        url("../../images/storeButton.png")
+        center / 100% 100%
+        no-repeat;
 
     border: none;
+
     color: #ebebeb;
     text-decoration: none;
+
+    font-family: "Press Start 2P", cursive;
+
+    /* Prevent text selection */
+    user-select: none;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
 }
 
-.store-button img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-.store-button:active {
-    transform: scale(0.97);
-    opacity: 0.85;
-}
-
-.store-button img{
-    /* filter: invert(1); */
-    width: 28px;
-    height: 28px;
+.google-image {
+    width: 14cqw;
+    height: 14cqw;
     object-fit: contain;
     flex-shrink: 0;
-    transform: translateY(-4px);
+    transform: translateY(-1cqw);
 }
+
+.apple-image {
+    width: 14cqw;
+    height: 14cqw;
+    object-fit: contain;
+    flex-shrink: 0;
+    transform: translateY(-3cqw);
+}
+
 .store-button span {
-        width: 154px;
-            text-align: left;
-    transform: translateY(-2px);
+    width: 39cqw;
+    text-align: left;
+    font-size: 7cqw;
+    line-height: 1.1;
+    color: #ffffffd8;
+    transform: translateY(-1cqw);
+}
+
+/* =========================
+   Button Press
+   ========================= */
+
+.store-button:active {
+    background-image: url("../../images/storeButtonPressed.png");
+}
+
+.store-button:active span {
+    transform: translateY(+2cqw);
+}
+
+.store-button:active .apple-image {
+    transform: translateY(0.7cqw);
+}
+
+.store-button:active .google-image {
+    transform: translateY(2cqw);
 }
