@@ -223,14 +223,14 @@ body::before {
         radial-gradient(
             ellipse at center,
             transparent 55%,
-            rgba(0, 0, 0, 0.30) 100%
+            rgba(0, 0, 0, 0.1) 100%
         );
 
     background-size:
-        100% 4px,
+        100% 8px,
         100% 100%;
 
-    animation: scanlines 10s linear infinite;
+    animation: scanlines 3s linear infinite;
 }
 
 @keyframes scanlines {
@@ -242,10 +242,11 @@ body::before {
 
     to {
         background-position:
-            0 4px,
+            0 8px,
             0 0;
     }
 }
+
 .crt-overlay::after {
     content: "";
     position: absolute;
