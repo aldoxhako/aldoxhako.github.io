@@ -147,6 +147,7 @@ body::before {
 
     /* Prevent text selection */
     user-select: none;
+    -webkit-user-select: none;
 
     transition:
         transform 0.15s ease,
@@ -167,6 +168,11 @@ body::before {
     object-fit: contain;
     flex-shrink: 0;
     transform: translateY(-1cqw);
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
 }
 
 .apple-image {
@@ -175,6 +181,11 @@ body::before {
     object-fit: contain;
     flex-shrink: 0;
     transform: translateY(-1.6cqw);
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
 }
 
 .store-button span {
